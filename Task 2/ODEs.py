@@ -10,36 +10,35 @@ def pend(y,t):
     dydt = [omega, -sin(theta) - q*omega + F * sin(Q*t)]
     return dydt
 
-
-
-# Initial conditions #
+# ---Initial conditions---
 y0 = [pi/2, 0] 
 q = 0.5
 F = 1.465
 Q = 2/3
-# Generate equally spaced points 
+
+# ---Generate equally spaced points--- 
 t = np.linspace(0, 20, 1000)
 y = odeint(pend, y0, t)
 angle = y[:,0]
 Omega = y[:,1]
-## producing plots for different values of q
 
-#z = []
-#for i in range(len(y)):
-#    for q in range(1,10):
-#        z.append(y[i,0])
+# ---producing plots for different values of q---
+
+z = []
+for i in range(len(y)):
+    for q in range(1,10):
+        z.append(y[i,0])
 #print(z)
-## finding the value 
+
+# ---finding the value when the function is zero---
 for i in range(1, len(y)):
     if abs(Omega[i] + Omega[i-1]) == abs(Omega[i]) + abs(Omega[i-1]):
             continue
     else:
         print(t[i+1])
 
-
 #start = zeros((5,len(y)))
 #print(start)
-
 
 def func(x):
     return 0.01*np.cos(x)
@@ -50,7 +49,7 @@ for i in range(len(y)):
     Energy.append(50*(y[i,1]**2)+50*(y[i,0]**2))
     
 y3 = y[:,0] 
-## plotting the solutions out
+# ---plotting the solutions out---
 #for q in range(1,12,5):
 plt.plot(t, angle, 'b', label='theta(t)')
 #plt.show()    
